@@ -18,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.ico" />
       <body className={`antialiased min-h-screen bg-gradient-to-br from-green-100 via-blue-100 to-purple-200`}>
         <>
           <Header />

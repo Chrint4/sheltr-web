@@ -19,11 +19,9 @@ import MainFoodBankCard from './MainFoodBankCard';
 import FoodBankCard from './FoodBankCard';
 import { getUserPosition } from '../map/Locations/UserPosition';
 
-
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is undefined");
 }
-
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 

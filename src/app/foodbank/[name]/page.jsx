@@ -49,7 +49,6 @@ export default function FoodBankDetail() {
                             </a>
                         </p>
 
-                        {/* DOESNT WORK */}
                         <iframe
                             src={foodbank.shopping_list_url}
                             title="Shopping List"
