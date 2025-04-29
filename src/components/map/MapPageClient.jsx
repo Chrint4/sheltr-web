@@ -32,10 +32,17 @@ export default function MapPage() {
         facs: false
     });
 
-    const handleFilterChange = async (type) => {
-        setFilters({ ...filters, [type]: !filters[type] });
-        console.log(type)
-    };
+    const handleFilterChange = (type) => {
+        setFilters(prevFilters => {
+            const newFilters = { ...prevFilters, [type]: !prevFilters[type]}
+
+            if (newFilters[type]) {
+                setSelectedTab(type);
+            }
+            
+            return newFilters;
+        });
+    };
 
     useEffect(() => {
         updateSearch(queriedPostcode, 20000, setUserPosition, setFoodBanks, setShelters, setFacs)
