@@ -4,6 +4,8 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import setTitle from "@/lib/setTitle";
 
+import FoodbankPin from '@/components/Pins/FoodbankPin';
+
 import {
     APIProvider,
     Map,
@@ -23,7 +25,7 @@ export default function FoodBankDetail() {
             .then(data => {
                 const found = data.find(fb => fb.name === name);
                 setFoodbank(found);
-                
+
                 found ? setTitle(found.name) : setTitle("Food bank not found");
             });
     }, [name]);
@@ -34,7 +36,7 @@ export default function FoodBankDetail() {
     const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API;
     const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID;
 
-    const latlng = {lat: foodbank.latitude, lng: foodbank.longitude}
+    const latlng = { lat: foodbank.latitude, lng: foodbank.longitude }
 
     return (
         <>
@@ -74,22 +76,7 @@ export default function FoodBankDetail() {
                                     position={latlng}
                                     title={foodbank.name}
                                 >
-                                    <Pin
-                                        background={"white"}
-                                        scale={1.5}
-                                    >
-                                        <img     
-                                            src="/food-bank-icon.png"
-                                            alt="Food Bank Marker"
-                                            style={{
-                                                width: '33px',
-                                                height: '40px',
-                                                padding: '4px',
-                                                objectFit: 'contain',
-                                                filter: 'brightness(0) saturate(100%) invert(14%) sepia(100%) saturate(2500%) hue-rotate(0deg) brightness(101%) contrast(119%)' 
-                                            }}
-                                        />
-                                    </Pin>
+                                    <FoodbankPin />
                                 </AdvancedMarker>
                             </Map>
                         </APIProvider>

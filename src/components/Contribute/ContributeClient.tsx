@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from 'next/image';
-// import ResourceCard from "@/components/resource/ResourceCard";
-// import { toast } from "sonner";
 
 import CheckoutPage from "@/components/payment/CheckoutPage";
 import CurrencyInput from "@/components/payment/CurrencyInput";

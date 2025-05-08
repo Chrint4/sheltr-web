@@ -3,6 +3,8 @@ import {
     useMap
 } from "@vis.gl/react-google-maps";
 
+import FoodbankPin from "../Pins/FoodbankPin";
+
 export function PositionMarker({ foodbank }) {
     const map = useMap();
 
@@ -13,6 +15,8 @@ export function PositionMarker({ foodbank }) {
             key={foodbank.id}
             position={foodbank.latlng}
             title={foodbank.name}
-        />
+        >
+            <FoodbankPin />
+        </AdvancedMarker>
     )
 }

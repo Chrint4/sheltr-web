@@ -39,15 +39,29 @@ export default function MainFoodBankCard({ foodbank }) {
                     {/* </div> */}
 
                     <p className="text-gray-600">{foodbank?.address ?? "Empty"}</p>
-                    <p className="text-gray-800 font-medium mt-1">
+                    <p className="text-gray-800 font-medium mt-1 mb-2">
                         Distance: <span className="text-blue-500">{(foodbank?.dist / 1000).toFixed(2)} km</span>
                     </p>
 
-                    <Button asChild className="mt-auto bg-[#3730a3] text-white hover:bg-opacity-90 rounded-full">
-                        <a href={foodbank?.homepage_url} target="_blank" rel="noreferrer" className="container">
-                            Visit Website
-                        </a>
-                    </Button>
+                    <div className="flex flex-wrap gap-4">
+                        <Button asChild className="mt-auto bg-[#3730a3] text-white hover:bg-opacity-90 rounded-full flex-1">
+                            <a href={foodbank?.homepage_url} target="_blank" rel="noreferrer">
+                                Visit Website
+                            </a>
+                        </Button>
+
+                        <Button asChild className="mt-auto bg-[#3730a3] text-white hover:bg-opacity-90 rounded-full flex-1">
+                            <a
+                                href={`https://www.google.com/maps/dir/?api=1&destination=${foodbank?.latlng}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Get Directions
+                            </a>
+                        </Button>
+                    </div>
+
+
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { getDistance } from "geolib";
+// import { getDistance } from "geolib";
 
 import MainMap from './MainMap';
 import LocationList from './LocationList';
@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from 'sonner';
 
-import { getUserPosition } from './Locations/UserPosition';
+// import { getUserPosition } from './Locations/UserPosition';
 
 export default function MapPage() {
     const [userPosition, setUserPosition] = useState(null);
@@ -41,8 +41,8 @@ export default function MapPage() {
             }
             
             return newFilters;
-        });
-    };
+        });
+    };
 
     useEffect(() => {
         updateSearch(queriedPostcode, 20000, setUserPosition, setFoodBanks, setShelters, setFacs)
@@ -92,8 +92,6 @@ export default function MapPage() {
                         <FilterButton text="NHS Walk-in Centres (coming soon)" enabled={false} />
                     </div>
                 </div>
-
-
 
                 {/* Map */}
                 <div className="bg-white/80 rounded-lg overflow-hidden shadow-md h-[800px] relative mb-6">
