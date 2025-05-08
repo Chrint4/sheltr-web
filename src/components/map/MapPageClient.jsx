@@ -95,8 +95,6 @@ export default function MapPage() {
 
 
 
-
-
                 {/* Map */}
                 <div className="bg-white/80 rounded-lg overflow-hidden shadow-md h-[800px] relative mb-6">
                     <MainMap

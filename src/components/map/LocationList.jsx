@@ -22,6 +22,12 @@ export default function LocationList({ foodBanks, shelters, facs, filterOptions,
 
     const isVisible = (tab) => filterOptions[tab] || !(filterOptions.foodBanks || filterOptions.shelters || filterOptions.facs);
 
+    const formatName = name => {
+        return name
+            .replace(/_/g, ' ')
+            .replace(/\b\w/g, char => char.toUpperCase());
+    }
+
     return (
         <div className="w-full bg-white rounded-xl shadow-md pt-1 pb-6 px-6">
             <>
@@ -41,47 +47,21 @@ export default function LocationList({ foodBanks, shelters, facs, filterOptions,
 
                 <div className="space-y-4">
                     {getDataForTab(selectedTab)?.map((item, index) => (
-                        <>
-                            {selectedTab == 'foodBanks' ? (
-                                <>
-                                    <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition">
-                                        <Link href={`/foodbank/${encodeURIComponent(item.name)}`} className="block">
-                                            <h2 className="text-xl font-semibold text-gray-800">{item.name}</h2>
-                                            {item.type && <strong className="text-gray-600">{item.type}</strong>}
-                                            <p className="text-gray-600">{item.address}</p>
-                                            {item.dist && (
-                                                <p className="text-gray-800 font-medium mt-2">
-                                                    Distance:{" "}
-                                                    <span className="text-blue-500">
-                                                        {(item.dist / 1000).toFixed(2)} km
-                                                    </span>
-                                                </p>
-                                            )}
-                                        </Link>
-                                    </div>
-
-                                </>
-                            ) : (
-                                <>
-                                    <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition">
-
-                                        <div className="block">
-                                            <h2 className="text-xl font-semibold text-gray-800">{item.name}</h2>
-                                            {item.type && <strong className="text-gray-600">{item.type}</strong>}
-                                            <p className="text-gray-600">{item.address}</p>
-                                            {item.dist && (
-                                                <p className="text-gray-800 font-medium mt-2">
-                                                    Distance:{" "}
-                                                    <span className="text-blue-500">
-                                                        {(item.dist / 1000).toFixed(2)} km
-                                                    </span>
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </>
+                        <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-sm hover:bg-gray-200 transition">
+                            <Link href={`/${selectedTab == 'foodBanks' ? 'foodbank' : selectedTab == 'shelters' ?  'shelter' : 'facility'}/${encodeURIComponent(item.name)}`} className="block">
+                                <h2 className="text-xl font-semibold text-gray-800">{item.type ? formatName(item.name) : item.name}</h2>
+                                {item.type && <strong className="text-gray-600">{formatName(item.type)}</strong>}
+                                <p className="text-gray-600">{item.address}</p>
+                                {item.dist && (
+                                    <p className="text-gray-800 font-medium mt-2">
+                                        Distance:{" "}
+                                        <span className="text-blue-500">
+                                            {(item.dist / 1000).toFixed(2)} km
+                                        </span>
+                                    </p>
+                                )}
+                            </Link>
+                        </div>
                     ))}
                 </div>
             </>

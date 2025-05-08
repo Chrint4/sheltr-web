@@ -4,6 +4,13 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import setTitle from "@/lib/setTitle";
 
+import {
+    APIProvider,
+    Map,
+    Pin,
+    AdvancedMarker,
+} from "@vis.gl/react-google-maps";
+
 export default function FoodBankDetail() {
     const params = useParams();
     const name = decodeURIComponent(params.name);
@@ -11,7 +18,7 @@ export default function FoodBankDetail() {
 
     useEffect(() => {
         if (!name) return;
-        fetch('https://sheltr-db.onrender.com/getFoodBanks')
+        fetch(process.env.NEXT_PUBLIC_URL_FOODBANK)
             .then(res => res.json())
             .then(data => {
                 const found = data.find(fb => fb.name === name);
@@ -23,6 +30,11 @@ export default function FoodBankDetail() {
 
     if (!foodbank)
         return <p>Loading food bank details...</p>;
+
+    const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API;
+    const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID;
+
+    const latlng = {lat: foodbank.latitude, lng: foodbank.longitude}
 
     return (
         <>
@@ -40,24 +52,70 @@ export default function FoodBankDetail() {
                     </p>
                 )}
 
-                <h2 className="text-xl font-semibold mt-6">Shopping List</h2>
-                {foodbank.shopping_list_url ? (
-                    <>
-                        <p className="text-blue-600 mt-2">
-                            <a href={foodbank.shopping_list_url} target="_blank" rel="noreferrer">
-                                Visit Shopping List
-                            </a>
-                        </p>
+                <details open>
+                    <summary className="text-xl font-semibold mt-6">Directions</summary>
+                    <a
+                        href={`https://www.google.com/maps/dir/?api=1&destination=${foodbank.latitude},${foodbank.longitude}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-block bg-blue-500 text-white py-1.5 px-4 rounded-lg"
+                    >
+                        Get Directions
+                    </a>
 
-                        <iframe
-                            src={foodbank.shopping_list_url}
-                            title="Shopping List"
-                            className="w-full h-[600px] mt-4 border rounded-md"
-                        />
-                    </>
-                ) : (
-                    <p className="text-gray-500 mt-2">No shopping list available.</p>
-                )}
+                    <div className="bg-white/80 rounded-lg overflow-hidden shadow-md h-[800px] relative mb-6 mt-2">
+                        <APIProvider apiKey={API_KEY}>
+                            <Map
+                                defaultCenter={latlng}
+                                defaultZoom={17}
+                                mapId={MAP_ID}
+                            >
+                                <AdvancedMarker
+                                    position={latlng}
+                                    title={foodbank.name}
+                                >
+                                    <Pin
+                                        background={"white"}
+                                        scale={1.5}
+                                    >
+                                        <img     
+                                            src="/food-bank-icon.png"
+                                            alt="Food Bank Marker"
+                                            style={{
+                                                width: '33px',
+                                                height: '40px',
+                                                padding: '4px',
+                                                objectFit: 'contain',
+                                                filter: 'brightness(0) saturate(100%) invert(14%) sepia(100%) saturate(2500%) hue-rotate(0deg) brightness(101%) contrast(119%)' 
+                                            }}
+                                        />
+                                    </Pin>
+                                </AdvancedMarker>
+                            </Map>
+                        </APIProvider>
+                    </div>
+                </details>
+
+                <details open>
+                    <summary className="text-xl font-semibold mt-6">Shopping List</summary>
+                    {foodbank.shopping_list_url ? (
+                        <>
+                            <p className="text-blue-600 mt-2">
+                                <a href={foodbank.shopping_list_url} target="_blank" rel="noreferrer">
+                                    Visit Shopping List
+                                </a>
+                            </p>
+
+                            <iframe
+                                src={foodbank.shopping_list_url}
+                                title="Shopping List"
+                                className="w-full h-[1000px] mt-4 border rounded-md"
+                            />
+                        </>
+                    ) : (
+                        <p className="text-gray-500 mt-2">No shopping list available.</p>
+                    )}
+                </details>
             </div>
         </>
     );
