@@ -51,7 +51,7 @@ const ContributeClient = () => {
 
   useEffect(() => {
     handleSearch();
-  })
+  }, [])
 
   return (
     <section className="gradient-bg pt-6 pb-10 min-h-screen">
@@ -134,9 +134,11 @@ const ContributeClient = () => {
               Other Nearby Food Banks
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
               {nearbyBanks.slice(1).map((_, i) => (
                 <FoodBankCard key={"foodbank" + i} foodbank={nearbyBanks[i + 1]} />
               ))}
+
             </div>
           </div>
         )}
