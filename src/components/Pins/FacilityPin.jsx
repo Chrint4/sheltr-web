@@ -1,10 +1,10 @@
 import { Pin } from "@vis.gl/react-google-maps";
 
-export default function FacilityPin({ type }) {
+export default function FacilityPin({ type, scale = 1.2 }) {
     return (
         <Pin
             background={"white"}
-            scale={1.2}
+            scale={scale}
             borderColor={"#20C997"}
         >
             {(() => {

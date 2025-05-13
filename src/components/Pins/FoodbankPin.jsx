@@ -1,10 +1,10 @@
 import { Pin } from "@vis.gl/react-google-maps";
 
-export default function FoodbankPin() {
+export default function FoodbankPin({ scale = 1.2 }) {
     return (
         <Pin
             background={"white"}
-            scale={1.5}
+            scale={scale}
         >
             <img
                 src="/food-bank-icon.png"

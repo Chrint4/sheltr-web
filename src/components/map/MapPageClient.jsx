@@ -104,6 +104,12 @@ export default function MapPage() {
                     />
                 </div>
 
+                <div className="flex justify-end -mt-5 mb-8 pr-2">
+                    <div className="bg-white text-gray-500 text-xs px-3 py-1 rounded shadow-sm">
+                        Data from <a href="https://www.givefood.org.uk/api/" target="_blank" rel="noopener noreferrer" className="underline text-blue-500">Give Food API</a>
+                    </div>
+                </div>
+
                 {/* Location List */}
                 <LocationList
                     foodBanks={foodBanks}

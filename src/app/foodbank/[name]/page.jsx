@@ -76,7 +76,7 @@ export default function FoodBankDetail() {
                                     position={latlng}
                                     title={foodbank.name}
                                 >
-                                    <FoodbankPin />
+                                    <FoodbankPin scale={1.5}/>
                                 </AdvancedMarker>
                             </Map>
                         </APIProvider>

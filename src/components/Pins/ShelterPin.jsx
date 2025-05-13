@@ -1,11 +1,11 @@
 import { Pin } from "@vis.gl/react-google-maps";
 
-export default function ShelterPin({ is_accepting = true }) {
+export default function ShelterPin({ is_accepting = true, scale = 1.2 }) {
     return (
         <Pin
             background={is_accepting ? "#80E0A7" : "#F76C6C"}
             borderColor={"#275C6A"}
-            scale={1.5}
+            scale={scale}
         >
             <img
                 src="/shelter-icon.png"

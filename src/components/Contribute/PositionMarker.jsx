@@ -16,7 +16,7 @@ export function PositionMarker({ foodbank }) {
             position={foodbank.latlng}
             title={foodbank.name}
         >
-            <FoodbankPin />
+            <FoodbankPin scale={1.5}/>
         </AdvancedMarker>
     )
 }

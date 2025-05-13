@@ -70,7 +70,7 @@ export default function FacilityDetail() {
                                 position={latlng}
                                 title={formatName(facility.name)}
                             >
-                                <FacilityPin type={facility.type} />
+                                <FacilityPin type={facility.type} scale={1.5}/>
                             </AdvancedMarker>
                         </Map>
                     </APIProvider>

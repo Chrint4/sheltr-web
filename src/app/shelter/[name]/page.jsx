@@ -72,7 +72,7 @@ export default function ShelterDetail() {
                             position={latlng}
                             title={shelter.name}
                         >
-                            <ShelterPin is_accepting={shelter.is_accepting} />
+                            <ShelterPin is_accepting={shelter.is_accepting} scale={1.5}/>
                         </AdvancedMarker>
                     </Map>
                 </APIProvider>
